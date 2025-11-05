@@ -47,6 +47,7 @@ function ProjectDetailsPage () {
       })}
 
       {/* ... form for adding a new Task should be rendered here    */}
+      <AddTask projectId={project.id} getData={getData}/>
 
       <Link to="/projects">
         <button>Back to projects</button>

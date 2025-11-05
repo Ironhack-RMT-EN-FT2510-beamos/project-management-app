@@ -1,15 +1,36 @@
 
+import axios from "axios";
 import { useState } from "react";
 
-function AddTask() {
+function AddTask(props) {
+
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
 
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     // ...logic for creating a new Task should be here
     // ... the ID of the Project should be part of the Task data
+
+    const newTask = {
+      title,
+      description,
+      projectId: props.projectId
+    }
+
+    // console.log(newTask)
+
+    try {
+      
+      const response = await axios.post(`${import.meta.env.VITE_SERVER_URL}/tasks`, newTask)
+      console.log("task created")
+
+      props.getData() // refresh the project data after the edit
+
+    } catch (error) {
+      console.log(error)
+    }
+
 
   };
   
